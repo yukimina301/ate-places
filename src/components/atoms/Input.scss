@@ -1,0 +1,12 @@
+.RadioGroup {
+  display: inline-block;
+  margin: 20px;
+
+  &--orange {
+    background-color: orange;
+  }
+
+  &--green {
+    background-color: green;
+  }
+}

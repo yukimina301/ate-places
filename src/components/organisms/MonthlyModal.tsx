@@ -1,4 +1,7 @@
+import React from 'react';
+import { Input } from '../atoms/Input';
 import { RadioGroup } from '../atoms/RadioGroup';
+import { TextArea } from '../atoms/TextArea';
 import './MonthlyModal.scss';
 
 type Inputs = {
@@ -11,14 +14,17 @@ type Props = {
   selectedDate: Date;
   show: boolean;
   inputs: Inputs;
-  updateInputs: (nputs: Inputs) => void;
+  updateInputs: (inputs: Inputs) => void;
   onClick: () => void;
+  onChangePlace: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCost: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDetail: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const COMPONENT_NAME = 'MonthlyModal';
 
 export const MonthlyModal = (props: Props) => {
-  const {selectedDate, show, onClick} = props;
+  const {selectedDate, show, inputs, onClick, onChangePlace, onChangeCost, onChangeDetail} = props;
 
   if (show) {
     return (
@@ -28,31 +34,29 @@ export const MonthlyModal = (props: Props) => {
           <p>{selectedDate.getDate()}</p>
 
           <form className={`${COMPONENT_NAME}__form`} action="">
-            {/* <RadioGroup
+            <RadioGroup
               name="place"
               value={['eat-out', 'eat-home']}
+              inputValue={inputs.place}
+              onChange={onChangePlace}
+            />
 
-            ></RadioGroup> */}
-            <label className={`${COMPONENT_NAME}__label`} htmlFor="eat-out-id">
-              eatout
-              <input type="radio" id="eat-out-id" value="eat-out" name="place"/>
-            </label>
+            ¥ <Input
+              name="cost"
+              inputValue={inputs.cost}
+              onChange={onChangeCost}
+            />
 
-            <label className={`${COMPONENT_NAME}__label`} htmlFor="eat-home-id">
-              eathome
-              <input type="radio" id="eat-home-id" value="eat-home" name="place"/>
-            </label>
-
-            <label className={`${COMPONENT_NAME}__label`} htmlFor="cost-id">
-              ¥ <input type="text" id="cost-id" name="cost"/>
-            </label>
-
-            <label className={`${COMPONENT_NAME}__label`} htmlFor="ate-detail-id">
-              <textarea name="detail" id="ate-detail-id" cols={30} rows={5}></textarea>
-            </label>
+            <TextArea
+              name='detail'
+              inputValue={inputs.detail}
+              cols={30}
+              rows={5}
+              onChange={onChangeDetail}
+            />
           </form>
 
-          <button onClick={onClick}>閉じる</button>
+          <button onClick={onClick}>送信して閉じる</button>
         </div>
       </div>
     )

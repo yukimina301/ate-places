@@ -21,7 +21,22 @@ export const Monthly = () => {
     cost: '',
     detail: '',
   });
+
+  useEffect(() => {
+    const firstDayOfSelectedMonth = startOfMonth(selectedDate);
+    const lastDayOfSelectedMonth = endOfMonth(selectedDate);
+    setSelectedDates(eachDayOfInterval({start: firstDayOfSelectedMonth, end: lastDayOfSelectedMonth}));
+  }, [selectedDate]);
+
   const updateInputs = (inputs: Inputs) => setInputs(inputs);
+
+  const initInputValue = () => {
+    updateInputs({
+      place: '',
+      cost: '',
+      detail: ''
+    });
+  }
 
   const handleClickPrev = () => {
     setSelectedDate((prevState) => subMonths(prevState, 1));
@@ -36,14 +51,22 @@ export const Monthly = () => {
   };
 
   const handleCloseModal = () => {
+    alert(`${inputs.place}, ${inputs.cost}, ${inputs.detail}`);
+    initInputValue();
     setIsModalShow(false);
   };
 
-  useEffect(() => {
-    const firstDayOfSelectedMonth = startOfMonth(selectedDate);
-    const lastDayOfSelectedMonth = endOfMonth(selectedDate);
-    setSelectedDates(eachDayOfInterval({start: firstDayOfSelectedMonth, end: lastDayOfSelectedMonth}));
-  }, [selectedDate]);
+  const handleChangePlace = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateInputs({...inputs, place: e.target.value});
+  };
+
+  const handleChangeCost = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateInputs({...inputs, cost: e.target.value});
+  }
+
+  const handleChangeDetail = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    updateInputs({...inputs, detail: e.target.value});
+  }
 
   return (
     <div className={COMPONENT_NAME}>
@@ -66,6 +89,9 @@ export const Monthly = () => {
         inputs={inputs}
         updateInputs={updateInputs}
         onClick={handleCloseModal}
+        onChangePlace={handleChangePlace}
+        onChangeCost={handleChangeCost}
+        onChangeDetail={handleChangeDetail}
       />
     </div>
   );
