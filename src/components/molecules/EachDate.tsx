@@ -1,5 +1,5 @@
-import {EachDateCell} from './EachDateCell';
 import './EachDate.scss';
+import { Tag } from '../atoms/Tag';
 
 
 type Props = {
@@ -20,9 +20,12 @@ export const EachDate = (props: Props) => {
             <table className={`${COMPONENT_NAME}__table`} onClick={onClick}>
                 <tbody>
                     <tr>
-                        <th>{date.getDate()}</th>
-                        <td>
-                            <EachDateCell dataByDate={dataByDate}/>
+                        <th className={`${COMPONENT_NAME}__date`} >{`${date.getDate()}日`}</th>
+                        <td className={`${COMPONENT_NAME}__tag`}>
+                            <Tag isEatingOut={dataByDate.isEatingOut}/>
+                        </td>
+                        <td className={`${COMPONENT_NAME}__cost`}>
+                            {`¥ ${dataByDate.amounts}`}
                         </td>
                     </tr>
                 </tbody>
