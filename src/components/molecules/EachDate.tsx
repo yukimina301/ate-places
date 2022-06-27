@@ -9,20 +9,20 @@ import { Button } from '../atoms/Button';
 type Props = {
     date: Date;
     dataByDate: MonthlyDate,
-    onClick: (dataByDate: MonthlyDate) => void,
+    onShowClick: (dataByDate: MonthlyDate) => void,
     onDeleteClick: (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>, dataByDate: MonthlyDate) => void,
 };
 
 const COMPONENT_NAME = 'EachDate';
 
 export const EachDate = (props: Props) => {
-    const {date, dataByDate, onClick, onDeleteClick} = props;
+    const {date, dataByDate, onShowClick, onDeleteClick} = props;
 
     const tag = dataByDate?.place === 'home' ? {text:'自炊', color: 'orange'}: {text: '外食', color: 'green'};
 
     return (
         <div className={COMPONENT_NAME}>
-            <table className={`${COMPONENT_NAME}__table`} onClick={() => onClick(dataByDate)}>
+            <table className={`${COMPONENT_NAME}__table`} onClick={() => onShowClick(dataByDate)}>
                 <tbody>
                     <tr className={`${COMPONENT_NAME}__tr`} >
                         <th className={`${COMPONENT_NAME}__date`} >{format(date, "d日 (E)", { locale: ja })}</th>

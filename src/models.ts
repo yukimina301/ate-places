@@ -5,12 +5,12 @@ export type MonthlyDate = {
     amounts: string,
 }
 
-// export type IComment = {
-//     user: IUser
-//     content: string
-//     createdAt: Date
-//     id: string
-// }
+
+export type Inputs = {
+    place: string,
+    amounts: string,
+    detail: string,
+  }
 
 // export type ICommentAdd = {
 //     user: IUser

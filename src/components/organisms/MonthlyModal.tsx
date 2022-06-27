@@ -16,7 +16,7 @@ type Props = {
   show: boolean;
   inputs: Inputs;
   updateInputs: (inputs: Inputs) => void;
-  onClick: () => void;
+  onCloseClick: () => void;
   onChangePlace: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeAmounts: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDetail: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -25,7 +25,7 @@ type Props = {
 const COMPONENT_NAME = 'MonthlyModal';
 
 export const MonthlyModal = (props: Props) => {
-  const {selectedDate, show, inputs, onClick, onChangePlace, onChangeAmounts, onChangeDetail} = props;
+  const {selectedDate, show, inputs, onCloseClick, onChangePlace, onChangeAmounts, onChangeDetail} = props;
 
   if (show) {
     return (
@@ -58,7 +58,7 @@ export const MonthlyModal = (props: Props) => {
           <footer className={`${COMPONENT_NAME}__footer`}>
             <Button
             text="送信して閉じる"
-            onClick={onClick}
+            onClick={onCloseClick}
             />
           </footer>
         </div>

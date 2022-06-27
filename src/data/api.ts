@@ -60,8 +60,8 @@ const updateMonthlyDate = async (monthlyDate: MonthlyDate) => {
 };
 
 // 削除
-const deleteMonthlyDate = async (monthlyDate: MonthlyDate) => {
+const delMonthlyDate = async (monthlyDate: MonthlyDate) => {
   await deleteDoc(doc(db, 'monthly', monthlyDate.docId));
 }
 
-export { dispMonthly, addMonthlyDate, updateMonthlyDate, deleteMonthlyDate }
+export { dispMonthly, addMonthlyDate, updateMonthlyDate, delMonthlyDate }

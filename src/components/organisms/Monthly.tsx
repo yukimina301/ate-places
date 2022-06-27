@@ -4,14 +4,8 @@ import {MonthlyHeader} from '../molecules/MonthlyHeader'
 import {EachDate} from '../molecules/EachDate'
 import { MonthlyModal } from './MonthlyModal';
 import './Monthly.scss'
-import { MonthlyDate } from '../../models';
-import { dispMonthly, addMonthlyDate, updateMonthlyDate, deleteMonthlyDate } from '../../api/api';
-
-type Inputs = {
-  place: string,
-  amounts: string,
-  detail: string,
-}
+import { MonthlyDate, Inputs } from '../../models';
+import { getMonthly, saveMonthlyDate, deleteMonthlyDate } from '../../data/repository';
 
 const COMPONENT_NAME = 'Monthly';
 
@@ -28,8 +22,14 @@ export const Monthly = () => {
     detail: '',
   });
 
+  const updateInputs = (inputs: Inputs) => setInputs(inputs);
+  const updateDocId = (id: string) => setSelectedDocId(id);
+
   useEffect(() => {
-    getMonthly();
+    getMonthly(
+      selectedMonth,
+      setMonthlyDates,
+    );
   }, []);
 
   useEffect(() => {
@@ -37,48 +37,6 @@ export const Monthly = () => {
     const lastDayOfSelectedMonth = endOfMonth(selectedMonth);
     setSelectedDates(eachDayOfInterval({start: firstDayOfSelectedMonth, end: lastDayOfSelectedMonth}));
   }, [selectedMonth]);
-
-  const getMonthly = () => {
-    dispMonthly(selectedMonth, setMonthlyDates);
-  }
-
-  const saveMonthlyDate = () => {
-    if(selectedDocId) {
-      updateMonthlyDate({
-        docId: selectedDocId,
-        date: selectedDate,
-        place: inputs.place,
-        amounts: inputs.amounts,
-      }).then(() => {
-        getMonthly();
-      }).catch((e) => {
-        alert(e);
-      });
-    } else {
-      addMonthlyDate({
-        docId: selectedDocId,
-        date: selectedDate,
-        place: inputs.place,
-        amounts: inputs.amounts,
-      }).then(() => {
-        getMonthly();
-      }).catch((e) => {
-        alert(e);
-      });
-    }
-  };
-
-  const delMonthlyDate = (dataByDate: MonthlyDate) => {
-    deleteMonthlyDate(dataByDate)
-    .then(() => {
-      getMonthly();
-    }).catch((e) => {
-      alert(e);
-    });
-  };
-
-  const updateInputs = (inputs: Inputs) => setInputs(inputs);
-  const updateDocId = (id: string) => setSelectedDocId(id);
 
   const initInputValue = () => {
     updateInputs({
@@ -88,7 +46,7 @@ export const Monthly = () => {
     });
   }
 
-  const getDateDate = (date: Date) => {
+  const findDateDate = (date: Date) => {
     const found = monthlyDates.find((monthlyDate) => {
       return isSameDay(monthlyDate.date, date);
     });
@@ -102,13 +60,19 @@ export const Monthly = () => {
 
   const handleClickPrev = () => {
     setSelectedMonth((prevState) => subMonths(prevState, 1));
-    getMonthly();
+    getMonthly(
+      selectedMonth,
+      setMonthlyDates
+    );
 
   };
 
   const handleClickNext = () => {
     setSelectedMonth((prevState) => addMonths(prevState, 1));
-    getMonthly();
+    getMonthly(
+      selectedMonth,
+      setMonthlyDates
+    );
   };
 
   const handleShowModal = (dataByDate: MonthlyDate) => {
@@ -124,7 +88,16 @@ export const Monthly = () => {
   };
 
   const handleCloseModal = () => {
-    saveMonthlyDate();
+    saveMonthlyDate(
+      selectedDocId,
+      selectedDate,
+      inputs
+    ).then(() => {
+      getMonthly(
+        selectedMonth,
+        setMonthlyDates
+      );
+    });
     initInputValue();
     setIsModalShow(false);
   };
@@ -143,7 +116,13 @@ export const Monthly = () => {
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, dataByDate: MonthlyDate) => {
     e.stopPropagation();
-    delMonthlyDate(dataByDate);
+    deleteMonthlyDate(dataByDate)
+    .then(() => {
+      getMonthly(
+        selectedMonth,
+        setMonthlyDates
+      );
+    });
   }
 
   return (
@@ -157,9 +136,9 @@ export const Monthly = () => {
       {selectedDates.map((date, index) => (
         <EachDate
           date={date}
-          dataByDate= {getDateDate(date) || null}
+          dataByDate= {findDateDate(date) || null}
           key={index}
-          onClick={handleShowModal}
+          onShowClick={handleShowModal}
           onDeleteClick={handleDeleteClick}
         />
       ))}
@@ -169,7 +148,7 @@ export const Monthly = () => {
         show={isModalShow}
         inputs={inputs}
         updateInputs={updateInputs}
-        onClick={handleCloseModal}
+        onCloseClick={handleCloseModal}
         onChangePlace={handleChangePlace}
         onChangeAmounts={handleChangeAmounts}
         onChangeDetail={handleChangeDetail}
