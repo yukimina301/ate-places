@@ -13,10 +13,10 @@ export const Input = (props: Props) => {
     const { name, inputValue, onChange } = props;
 
     return (
-        <>
-            <label>
-                <input className={`${COMPONENT_NAME}__input`} type="text" name={name} value={inputValue} onChange={onChange} />
-            </label>
-        </>
+        <label className={`${COMPONENT_NAME}__label`}>
+            {name}<br/>
+
+            <input className={`${COMPONENT_NAME}__input`} type="text" name={name} value={inputValue} onChange={onChange} />
+        </label>
     );
 };

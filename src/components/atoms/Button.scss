@@ -1,0 +1,18 @@
+.Button {
+  padding: 6px 12px;
+  margin: 0 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  background: rgb(245,232,217);
+  background: linear-gradient(0deg, rgba(245,232,217,1) 0%, rgba(129,129,255,1) 0%, rgba(255,136,136,1) 100%, rgba(245,218,182,1) 100%);
+  box-shadow: 0 3px 12px 0 rgb(28 0 255 / 13%), 0 3px 12px 0 rgb(255 0 0 / 6%);
+
+  &:hover {
+    background: rgb(245,232,217);
+    background: linear-gradient(0deg, rgba(245,232,217,1) 0%, rgba(180,171,254,1) 0%, rgba(252,177,177,1) 100%, rgba(245,218,182,1) 100%);
+  }
+}

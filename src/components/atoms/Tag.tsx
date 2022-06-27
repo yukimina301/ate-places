@@ -2,16 +2,17 @@ import React from "react";
 import "./Tag.scss";
 
 type Props = {
-    isEatingOut: boolean;
+    text: string;
+    color: string;
 };
 
 const COMPONENT_NAME = 'Tag';
 
 export const Tag = (props: Props) => {
-    const { isEatingOut } = props;
+    const { text, color } = props;
     return (
-        <div className={`${COMPONENT_NAME} ${COMPONENT_NAME}--${isEatingOut ? "orange" : "green"}`}>
-            {isEatingOut ? "外食" : "自炊"}
+        <div className={`${COMPONENT_NAME} ${COMPONENT_NAME}--${color}`}>
+            {text}
         </div>
     )
 };

@@ -15,10 +15,10 @@ export const TextArea = (props: Props) => {
     const { name, inputValue, cols, rows, onChange } = props;
 
     return (
-        <>
-            <label>
-                <textarea className={`${COMPONENT_NAME}__text-area`} name={name} value={inputValue} onChange={onChange} cols={cols} rows={rows}></textarea>
-            </label>
-        </>
+        <label className={`${COMPONENT_NAME}__label`}>
+            {name}<br/>
+
+            <textarea className={`${COMPONENT_NAME}__text-area`} name={name} value={inputValue} onChange={onChange} cols={cols} rows={rows}></textarea>
+        </label>
     );
 };

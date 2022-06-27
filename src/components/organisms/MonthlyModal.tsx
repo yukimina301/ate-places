@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../atoms/Button';
 import { Input } from '../atoms/Input';
 import { RadioGroup } from '../atoms/RadioGroup';
 import { TextArea } from '../atoms/TextArea';
@@ -6,7 +7,7 @@ import './MonthlyModal.scss';
 
 type Inputs = {
   place: string,
-  cost: string,
+  amounts: string,
   detail: string,
 }
 
@@ -17,34 +18,33 @@ type Props = {
   updateInputs: (inputs: Inputs) => void;
   onClick: () => void;
   onChangePlace: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeCost: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeAmounts: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDetail: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const COMPONENT_NAME = 'MonthlyModal';
 
 export const MonthlyModal = (props: Props) => {
-  const {selectedDate, show, inputs, onClick, onChangePlace, onChangeCost, onChangeDetail} = props;
+  const {selectedDate, show, inputs, onClick, onChangePlace, onChangeAmounts, onChangeDetail} = props;
 
   if (show) {
     return (
       <div className={COMPONENT_NAME}>
         <div className={`${COMPONENT_NAME}__content`}>
-
-          <p>{selectedDate.getDate()}</p>
+          <div className={`${COMPONENT_NAME}__date`}>{selectedDate.getDate()}</div>
 
           <form className={`${COMPONENT_NAME}__form`} action="">
             <RadioGroup
               name="place"
-              value={['eat-out', 'eat-home']}
+              value={['out', 'home']}
               inputValue={inputs.place}
               onChange={onChangePlace}
             />
 
-            ¥ <Input
-              name="cost"
-              inputValue={inputs.cost}
-              onChange={onChangeCost}
+            <Input
+              name="amounts"
+              inputValue={inputs.amounts}
+              onChange={onChangeAmounts}
             />
 
             <TextArea
@@ -55,8 +55,12 @@ export const MonthlyModal = (props: Props) => {
               onChange={onChangeDetail}
             />
           </form>
-
-          <button onClick={onClick}>送信して閉じる</button>
+          <footer className={`${COMPONENT_NAME}__footer`}>
+            <Button
+            text="送信して閉じる"
+            onClick={onClick}
+            />
+          </footer>
         </div>
       </div>
     )

@@ -1,5 +1,7 @@
 import {format} from 'date-fns'
 import ja from 'date-fns/locale/ja'
+import { Button } from '../atoms/Button';
+import './MonthlyHeader.scss';
 
 type Props = {
   selectedDate: Date;
@@ -14,9 +16,15 @@ export const MonthlyHeader = (props: Props) => {
 
   return (
     <header className={COMPONENT_NAME}>
-      <button onClick={() => onClickPrev()}>prev</button>
+      <Button
+        text='前月'
+        onClick={onClickPrev}
+      />
       {format(selectedDate, 'yyyy年 MM月', { locale: ja })}
-      <button onClick={onClickNext}>next</button>
+      <Button
+        text='次月'
+        onClick={onClickNext}
+      />
     </header>
   )
 };
