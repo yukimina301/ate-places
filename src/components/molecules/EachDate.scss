@@ -1,7 +1,6 @@
 .EachDate {
   &__table {
     width: 100%;
-    text-align: left;
     padding: 16px;
     margin: 12px 0px;
     color: rgb(77, 77, 77);
@@ -12,6 +11,7 @@
 
   &__tr {
     display: flex;
+    align-items: center;
   }
 
   &__date {

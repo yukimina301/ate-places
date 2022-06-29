@@ -3,6 +3,7 @@ export type MonthlyDate = {
     date: Date,
     place: string,
     amounts: string,
+    detail: string,
 }
 
 

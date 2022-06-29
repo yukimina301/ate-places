@@ -21,6 +21,7 @@ const saveMonthlyDate = async (
       date,
       place: inputs.place,
       amounts: inputs.amounts,
+      detail: inputs.detail,
     });
   } else {
     await addMonthlyDate({
@@ -28,6 +29,7 @@ const saveMonthlyDate = async (
       date,
       place: inputs.place,
       amounts: inputs.amounts,
+      detail: inputs.detail,
     });
   }
 };

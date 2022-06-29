@@ -56,6 +56,7 @@ export const Monthly = () => {
       date,
       place: '',
       amounts: '',
+      detail: '',
     }
   };
 
@@ -82,7 +83,7 @@ export const Monthly = () => {
     updateInputs({
       place: dataByDate.place ? dataByDate.place : '',
       amounts: String(dataByDate.amounts) ? String(dataByDate.amounts) : '',
-      detail: '',
+      detail: dataByDate.detail? dataByDate.detail : '',
     });
 
     setIsModalShow(true);

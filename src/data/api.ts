@@ -20,6 +20,7 @@ const dispMonthly = async (targetDate: Date, setMonthlyDates: React.Dispatch<Rea
         place: doc.data().place,
         date: doc.data().date.toDate(),
         amounts: doc.data().amounts,
+        detail: doc.data().detail,
       };
       monthly.push(date);
     });
@@ -40,6 +41,7 @@ const addMonthlyDate = async (monthlyDate: MonthlyDate) => {
     date: Timestamp.fromDate(monthlyDate.date),
     place: monthlyDate.place,
     amounts: monthlyDate.amounts,
+    detail: monthlyDate.detail,
   });
 };
 
@@ -55,6 +57,7 @@ const updateMonthlyDate = async (monthlyDate: MonthlyDate) => {
     date: Timestamp.fromDate(monthlyDate.date),
     place: monthlyDate.place,
     amounts: Number(monthlyDate.amounts),
+    detail: monthlyDate.detail,
   };
   setDoc(monthlyRef, updateObject, { merge: true });
 };
