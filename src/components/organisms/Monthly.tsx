@@ -24,6 +24,7 @@ export const Monthly = () => {
 
   const updateInputs = (inputs: Inputs) => setInputs(inputs);
   const updateDocId = (id: string) => setSelectedDocId(id);
+  const disabled = JSON.stringify(Object.values(inputs)) == JSON.stringify(['','','']);
 
   useEffect(() => {
     getMonthly(
@@ -88,6 +89,12 @@ export const Monthly = () => {
   };
 
   const handleCloseModal = () => {
+    initInputValue();
+    setIsModalShow(false);
+  };
+
+  const handleSaveClick = () => {
+
     saveMonthlyDate(
       selectedDocId,
       selectedDate,
@@ -100,7 +107,7 @@ export const Monthly = () => {
     });
     initInputValue();
     setIsModalShow(false);
-  };
+  }
 
   const handleChangePlace = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateInputs({...inputs, place: e.target.value});
@@ -144,14 +151,16 @@ export const Monthly = () => {
       ))}
 
       <MonthlyModal
-        selectedDate={selectedMonth}
+        disabled={disabled}
+        selectedDate={selectedDate}
         show={isModalShow}
         inputs={inputs}
         updateInputs={updateInputs}
-        onCloseClick={handleCloseModal}
         onChangePlace={handleChangePlace}
         onChangeAmounts={handleChangeAmounts}
         onChangeDetail={handleChangeDetail}
+        onSaveClick={handleSaveClick}
+        onCloseClick={handleCloseModal}
       />
     </div>
   );

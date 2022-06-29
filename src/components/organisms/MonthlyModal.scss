@@ -24,8 +24,14 @@
     box-shadow: 0 3px 12px 0 rgb(28 0 255 / 13%), 0 3px 12px 0 rgb(255 0 0 / 6%);
   }
 
-  &__date {
-    margin-top: 28px;
+  &__header {
+    display: flex;
+    padding: 16px;
+  }
+
+  &__icon {
+    margin-left: auto;
+    cursor: pointer;
   }
 
   &__form {
