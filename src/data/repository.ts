@@ -1,6 +1,7 @@
+import { User } from 'firebase/auth';
 import { MonthlyDate, Inputs } from '../models';
 
-import { dispMonthly, addMonthlyDate, updateMonthlyDate, delMonthlyDate } from '../data/api';
+import { dispMonthly, addMonthlyDate, updateMonthlyDate, delMonthlyDate } from './api-store';
 // 表示
 const getMonthly = async (
   selectedMonth: Date,
@@ -15,22 +16,18 @@ const saveMonthlyDate = async (
   date: Date,
   inputs: Inputs,
 ) => {
+  const monthlyDate = {
+    docId,
+    date,
+    place: inputs.place,
+    amounts: inputs.amounts,
+    detail: inputs.detail,
+  };
+
   if(docId) {
-    await updateMonthlyDate({
-      docId,
-      date,
-      place: inputs.place,
-      amounts: inputs.amounts,
-      detail: inputs.detail,
-    });
+    await updateMonthlyDate(monthlyDate);
   } else {
-    await addMonthlyDate({
-      docId,
-      date,
-      place: inputs.place,
-      amounts: inputs.amounts,
-      detail: inputs.detail,
-    });
+    await addMonthlyDate(monthlyDate);
   }
 };
 

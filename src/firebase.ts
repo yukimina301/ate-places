@@ -10,7 +10,8 @@ const firebaseConfig = {
   storageBucket: "ate-place.appspot.com",
   messagingSenderId: "499631127760",
   appId: "1:499631127760:web:9c96ee77bae4058360b2d5",
-  measurementId: "G-496SS6NBDR"
+  measurementId: "G-496SS6NBDR",
+  // ignoreUndefinedProperties: "true",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -20,4 +21,4 @@ const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 
-export default db;
+export {db, auth};

@@ -1,15 +1,22 @@
 import {startOfMonth, endOfMonth, eachDayOfInterval, addMonths, subMonths, isSameDay} from 'date-fns'
 import React, { useEffect, useState } from 'react';
-import {MonthlyHeader} from '../molecules/MonthlyHeader'
-import {EachDate} from '../molecules/EachDate'
-import { MonthlyModal } from './MonthlyModal';
+import {MonthlyHeader} from '../components/molecules/MonthlyHeader'
+import {EachDate} from '../components/molecules/EachDate'
+import { MonthlyModal } from '../components/organisms/MonthlyModal';
 import './Monthly.scss'
-import { MonthlyDate, Inputs } from '../../models';
-import { getMonthly, saveMonthlyDate, deleteMonthlyDate } from '../../data/repository';
+import { MonthlyDate, Inputs } from '../models';
+import { getMonthly, saveMonthlyDate, deleteMonthlyDate } from '../data/repository';
+import { User } from 'firebase/auth';
+import { useAuthContext } from '../AuthProvider';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const COMPONENT_NAME = 'Monthly';
 
 export const Monthly = () => {
+  const { user } = useAuthContext();
+  let navigate = useNavigate();
+
   const [selectedMonth, setSelectedMonth] = useState(new Date());
   const [selectedDates, setSelectedDates] = useState(eachDayOfInterval({start: new Date(), end: new Date()}));
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -27,17 +34,15 @@ export const Monthly = () => {
   const disabled = JSON.stringify(Object.values(inputs)) == JSON.stringify(['','','']);
 
   useEffect(() => {
+    const firstDayOfSelectedMonth = startOfMonth(selectedMonth);
+    const lastDayOfSelectedMonth = endOfMonth(selectedMonth);
+    setSelectedDates(eachDayOfInterval({start: firstDayOfSelectedMonth, end: lastDayOfSelectedMonth}));
+
     getMonthly(
       selectedMonth,
       setMonthlyDates,
     );
-  }, []);
-
-  useEffect(() => {
-    const firstDayOfSelectedMonth = startOfMonth(selectedMonth);
-    const lastDayOfSelectedMonth = endOfMonth(selectedMonth);
-    setSelectedDates(eachDayOfInterval({start: firstDayOfSelectedMonth, end: lastDayOfSelectedMonth}));
-  }, [selectedMonth]);
+  }, [user, selectedMonth]);
 
   const initInputValue = () => {
     updateInputs({
@@ -133,12 +138,18 @@ export const Monthly = () => {
     });
   }
 
+  const handleClickSignout = () => {
+    auth.signOut();
+    navigate('/signin');
+  };
+
   return (
     <div className={COMPONENT_NAME}>
       <MonthlyHeader
         selectedDate={selectedMonth}
         onClickPrev={handleClickPrev}
         onClickNext={handleClickNext}
+        onClickSignOut={handleClickSignout}
       />
   
       {selectedDates.map((date, index) => (
