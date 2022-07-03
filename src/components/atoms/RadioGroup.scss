@@ -1,12 +1,21 @@
 .RadioGroup {
-  display: inline-block;
-  margin: 20px;
+  display: block;
+  margin: 8px;
 
-  &--orange {
-    background-color: orange;
+  &__label {
+    display: inline-flex;
+    padding: 6px 12px;
+    margin: 0 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    background-color: rgb(178, 174, 172);
   }
 
-  &--green {
-    background-color: green;
+  &__input {
+    margin: 0 4px;
   }
 }
