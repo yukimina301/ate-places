@@ -10,8 +10,6 @@ const dispMonthly = async (targetDate: Date, setMonthlyDates: React.Dispatch<Rea
   const monthlyCollectionRef = collection(db, 'monthly');
   const sinceAtDate = Timestamp.fromDate(startOfMonth(targetDate));
   const recentAtDate = Timestamp.fromDate(endOfMonth(targetDate));
-  console.log(startOfMonth(targetDate));
-  console.log(endOfMonth(targetDate));
   const q = query(
     monthlyCollectionRef,
     orderBy('date'),
@@ -24,7 +22,6 @@ const dispMonthly = async (targetDate: Date, setMonthlyDates: React.Dispatch<Rea
   
   /* リアルタイムで取得 */
   const unsub = await onSnapshot(q, (querySnapshot) => {
-    console.log(querySnapshot.docs.length);
     querySnapshot.docs.map((doc) => {
       const dateData: MonthlyDate = {
         docId: doc.id,

@@ -29,7 +29,7 @@ export const SignIn = () => {
   }
 
   const onSignUpClick = () => {
-    navigate('/signup', { state: { id: 1 } });
+    navigate('/signup');
   }
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -17,7 +17,7 @@ createUserWithEmailAndPassword(auth, email, password)
     const user = userCredential.user;
     const uid = user.uid;
     console.log(user);
-    navigate('/', { state: { id: 1 } });
+    navigate('/');
     // ...
   })
   .catch((error) => {
@@ -35,7 +35,7 @@ const signInWithEmail = async (navigate: NavigateFunction ,email: string, passwo
   .then((userCredential) => {
     const user = userCredential.user;
     console.log(user);
-    navigate('/', { state: { id: 1 } });
+    navigate('/');
   })
   .catch((error) => {
     console.log(error.code);
@@ -56,7 +56,7 @@ const signInWithGoogleAuth = async (navigate: NavigateFunction) => {
 
       const user = result.user;
       console.log(user);
-      navigate('/', { state: { id: 1 } });
+      navigate('/');
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
