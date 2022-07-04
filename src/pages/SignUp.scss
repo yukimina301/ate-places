@@ -1,0 +1,23 @@
+.SignUp {
+  height: 100vh;
+  color: rgb(255, 255, 255);
+
+  // 中央寄せ
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    background: rgb(245,232,217);
+    background: linear-gradient(0deg, rgba(245,232,217,1) 0%, rgba(129,129,255,1) 0%, rgba(255,136,136,1) 100%, rgba(245,218,182,1) 100%);
+  }
+
+  &__google-auth {
+    cursor: pointer;
+  }
+
+  &__form {
+    padding: 20px;
+    text-align: left;
+  }
+}

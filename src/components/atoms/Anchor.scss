@@ -1,0 +1,18 @@
+.Anchor {
+  margin: 0 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #fff;
+
+  &--white {
+    color: #fff;
+  }
+
+  &--gray {
+    color: rgb(77, 77, 77);
+  }
+
+  &:hover {
+    color: rgba(180,171,254,1);
+  }
+}

@@ -1,0 +1,22 @@
+.Tag {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: middle;
+  padding: 4px 8px;
+  margin: 0 8px;
+  font-size: 6px;
+  border-radius: 16px;
+  color: #fff;
+  font-weight: bold;
+
+  &--orange {
+    background: rgb(245,232,217);
+    background: rgb(255, 153, 81);
+  }
+
+  &--green {
+    background: rgb(245,232,217);
+    background: rgba(87,155,87,1);
+  }
+}

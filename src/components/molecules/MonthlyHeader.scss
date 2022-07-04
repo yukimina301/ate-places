@@ -1,0 +1,17 @@
+.MonthlyHeader {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 80px;
+  line-height: 80px;
+  color: rgb(77, 77, 77);
+  vertical-align: middle;
+
+  &__month {
+    margin-left: auto;
+  }
+
+  &__anchor {
+    margin-left: auto;
+  }
+}

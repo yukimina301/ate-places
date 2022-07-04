@@ -1,0 +1,12 @@
+.TextArea {
+  &__label {
+    display: block;
+    margin: 8px;
+  }
+
+  &__text-area {
+    width: 100%;
+    border: 0.8px solid rgb(77, 77, 77);
+    border-radius: 4px;
+  }
+}
