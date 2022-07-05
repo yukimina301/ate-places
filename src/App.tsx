@@ -9,7 +9,7 @@ import PrivateRoute from './PrivateRouter';
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <div className="App">
           <Routes>
             <Route path="/" element={<PrivateRoute loginUser={false} children={<Monthly />} />}/>
