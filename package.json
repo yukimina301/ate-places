@@ -31,7 +31,7 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://yukimina301.github.io/ate-place/",
+  "homepage": "https://yukimina301.github.io/ate-places/",
   "eslintConfig": {
     "extends": [
       "react-app",
