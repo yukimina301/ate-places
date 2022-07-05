@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ate-places/static/css/main.37e9080f.css",
+    "main.js": "/ate-places/static/js/main.dbedf5d7.js",
+    "static/js/787.650c0653.chunk.js": "/ate-places/static/js/787.650c0653.chunk.js",
+    "index.html": "/ate-places/index.html",
+    "main.37e9080f.css.map": "/ate-places/static/css/main.37e9080f.css.map",
+    "main.dbedf5d7.js.map": "/ate-places/static/js/main.dbedf5d7.js.map",
+    "787.650c0653.chunk.js.map": "/ate-places/static/js/787.650c0653.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37e9080f.css",
+    "static/js/main.dbedf5d7.js"
+  ]
+}
